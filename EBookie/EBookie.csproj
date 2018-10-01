@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7D06173-44AF-4267-9A4A-84437DA10C75}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EBookie</RootNamespace>
+    <AssemblyName>EBookie</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppController.cs" />
+    <Compile Include="languages\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="model\EBookFolder.cs" />
+    <Compile Include="model\FilePath.cs" />
+    <Compile Include="model\IField.cs" />
+    <Compile Include="model\Language.cs" />
+    <Compile Include="model\PageEntry.cs" />
+    <Compile Include="model\PicSource.cs" />
+    <Compile Include="model\EBook.cs" />
+    <Compile Include="model\Settings.cs" />
+    <Compile Include="model\SyncDevice.cs" />
+    <Compile Include="services\CheckInputServices.cs" />
+    <Compile Include="services\DeepOperationsService.cs" />
+    <Compile Include="services\MessageCreationService.cs" />
+    <Compile Include="services\ReadWriteService.cs" />
+    <Compile Include="services\RelayCommand.cs" />
+    <Compile Include="viewmodel\AboutPageViewModel.cs" />
+    <Compile Include="viewmodel\AppWindowViewModel.cs" />
+    <Compile Include="viewmodel\LicenseTermsPageViewModel.cs" />
+    <Compile Include="viewmodel\MainPageViewModel.cs" />
+    <Compile Include="viewmodel\SettingsPageViewModel.cs" />
+    <Compile Include="view\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\AppWindow.xaml.cs">
+      <DependentUpon>AppWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\LicenseTermsPage.xaml.cs">
+      <DependentUpon>LicenseTermsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="languages\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="view\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\AppWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\LicenseTermsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\apply.png" />
+    <Resource Include="images\back.png" />
+    <Resource Include="images\cancel_m.png" />
+    <Resource Include="images\cancel_s.png" />
+    <Resource Include="images\connection.png" />
+    <Resource Include="images\delete.png" />
+    <Resource Include="images\edit_m.png" />
+    <Resource Include="images\edit_s.png" />
+    <Resource Include="images\english.png" />
+    <Resource Include="images\execute.png" />
+    <Resource Include="images\exit.png" />
+    <Resource Include="images\eye.png" />
+    <Resource Include="images\failure.png" />
+    <Resource Include="images\feedback.png" />
+    <Resource Include="images\german.png" />
+    <Resource Include="images\home.png" />
+    <Resource Include="images\import.png" />
+    <Resource Include="images\info.png" />
+    <Resource Include="images\info_m.png" />
+    <Resource Include="images\info_s.png" />
+    <Resource Include="images\languages.png" />
+    <Resource Include="images\link.png" />
+    <Resource Include="images\minus.png" />
+    <Resource Include="images\new.png" />
+    <Resource Include="images\open.png" />
+    <Resource Include="images\plus.png" />
+    <Resource Include="images\reset.png" />
+    <Resource Include="images\save.png" />
+    <Resource Include="images\settings.png" />
+    <Resource Include="images\star.png" />
+    <Resource Include="images\success.png" />
+    <Resource Include="images\upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ebookie.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

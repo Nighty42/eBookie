@@ -1,0 +1,118 @@
+﻿<Page x:Class="EBookie.view.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EBookie.view"
+      xmlns:p="clr-namespace:EBookie.languages"
+      mc:Ignorable="d" 
+      Background="GhostWhite"
+      d:DesignHeight="430"
+      d:DesignWidth="780" 
+      FontFamily="Arial"
+      Loaded="MainPage_Loaded"
+      Unloaded="MainPage_Unloaded">
+    <Grid>
+        <Label x:Name="lbl_chooseFolder" Content="{x:Static p:Resources.lbl_chooseFolder}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" FontSize="14" FontWeight="Bold"/>
+        <TextBox x:Name="tb_chooseFolder" Padding="3" HorizontalAlignment="Left" Height="26" Margin="150,1,0,0" VerticalAlignment="Top" Width="564" FontSize="14"/>
+        <Button x:Name="btn_chooseFolder" HorizontalAlignment="Left" Margin="719,1,0,0" VerticalAlignment="Top" Width="28" Height="26" ToolTip="{x:Static p:Resources.btn_chooseFolder_tooltip}">
+            <Image Source="pack://siteoforigin:,,,/images/open.png" Width="16"/>
+        </Button>
+        <Button x:Name="btn_addFolder" HorizontalAlignment="Left" Margin="752,1,0,0" VerticalAlignment="Top" Width="28" Height="26" ToolTip="{x:Static p:Resources.btn_addFolder_tooltip}">
+            <Image Source="pack://siteoforigin:,,,/images/plus.png" Width="16"/>
+        </Button>
+        <ListView x:Name="lv_eBookFolders" ItemsSource="{Binding EBOOKFOLDERS}" SelectedItem="{Binding Path=SelectedEBookFolder}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionMode="Single" Height="110" Margin="0,32,0,0" VerticalAlignment="Top" FontSize="14">
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Header="{x:Static p:Resources.lvc_path}" DisplayMemberBinding="{Binding PATH}" Width="480" />
+                    <GridViewColumn Header="{x:Static p:Resources.lvc_device}" DisplayMemberBinding="{Binding DEVICE}" Width="204" />
+                    <GridViewColumn Width="34">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="{x:Static p:Resources.lvc_btnOpenEBookFolderPath}" ToolTip="{x:Static p:Resources.lvc_btnOpenEBookFolderPath_tooltip}"/>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button ToolTip="{x:Static p:Resources.lvc_btnOpenEBookFolderPath_tooltip}" Click="OpenEBookFolderPath" CommandParameter="{Binding}" Height="22" Width="22">
+                                    <Image Source="pack://siteoforigin:,,,/images/open.png" Width="16"/>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="34">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="{x:Static p:Resources.lvc_removeEBookFolder}" ToolTip="{x:Static p:Resources.lvc_removeEBookFolder_tooltip}" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button ToolTip="{x:Static p:Resources.btn_removeEBookFolder_tooltip}" Click="RemoveEBookFolder" CommandParameter="{Binding}" Height="22" Width="22">
+                                    <Button.Content>
+                                        <Image Source="pack://siteoforigin:,,,/images/cancel_s.png"  Width="14"/>
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="lbl_Sync" Content="Synchronisierung:" Margin="0,147,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <ListView x:Name="lv_eBooks" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionMode="Single" Height="Auto" VerticalAlignment="Stretch" Margin="0,178,0,0" FontSize="14">
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Header="{x:Static p:Resources.lvc_title}" DisplayMemberBinding="{Binding TITLE}" Width="250" />
+                    <GridViewColumn Header="{x:Static p:Resources.lvc_author}" DisplayMemberBinding="{Binding AUTHOR}" Width="220" />
+                    <GridViewColumn Width="202">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="{x:Static p:Resources.lvc_syncDevice}" ToolTip="{x:Static p:Resources.lvc_syncDevice_tooltip}" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button ToolTip="{x:Static p:Resources.lvc_btnDeleteBook_tooltip}" Click="DeleteBook" CommandParameter="{Binding}" Height="22" Width="22">
+                                    <Button.Content>
+                                        <Image Source="pack://siteoforigin:,,,/images/delete.png"/>
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="40">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="{x:Static p:Resources.lvc_openPath}" ToolTip="{x:Static p:Resources.lvc_openPath_tooltip}" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button ToolTip="{x:Static p:Resources.lvc_btnOpenPath_tooltip}" Click="OpenPath" CommandParameter="{Binding}" Height="22" Width="22">
+                                    <Image Source="pack://siteoforigin:,,,/images/open.png"/>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="40">
+                        <GridViewColumn.Header>
+                            <TextBlock Text="{x:Static p:Resources.lvc_deleteBook}" ToolTip="{x:Static p:Resources.lvc_deleteBook_tooltip}" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button ToolTip="{x:Static p:Resources.lvc_btnDeleteBook_tooltip}" Click="DeleteBook" CommandParameter="{Binding}" Height="22" Width="22">
+                                    <Button.Content>
+                                        <Image Source="pack://siteoforigin:,,,/images/delete.png"/>
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

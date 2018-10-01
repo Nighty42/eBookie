@@ -1,0 +1,29 @@
+﻿<Page x:Class="EBookie.view.LicenseTermsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EBookie.view"
+      xmlns:p="clr-namespace:EBookie.languages"
+      mc:Ignorable="d"
+      Background="GhostWhite"
+      d:DesignHeight="430"
+      d:DesignWidth="800"
+      Loaded="LicenseTermsPage_Loaded"
+      Unloaded="LicenseTermsPage_Unloaded">
+    <Grid Margin="5,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="133*"/>
+            <ColumnDefinition Width="94*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="tb_copyright_h1" Text="{x:Static p:Resources.LicenseTermsPage_h1}" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Width="440" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="tb_copyright" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,41,0,0" TextAlignment="Justify" Grid.ColumnSpan="2"/>
+        <ScrollViewer Margin="0,80,0,0" Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{x:Static p:Resources.license_term_1}" Margin="0,0,5,0" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Justify" FontSize="14"/>
+                <TextBlock Text="{x:Static p:Resources.license_term_2}" Margin="0,20,5,0" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Justify" FontSize="14"/>
+                <TextBlock Text="{x:Static p:Resources.license_term_3}" Margin="0,20,5,0" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Justify" FontSize="14"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
