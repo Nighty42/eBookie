@@ -1,13 +1,12 @@
-﻿using EBookie.model;
-using EBookie.viewmodel;
+﻿using eBookie.model;
+using eBookie.viewmodel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 
-namespace EBookie.services
+namespace eBookie.services
 {
     public class ReadWriteService
     {
@@ -18,38 +17,22 @@ namespace EBookie.services
             get { return instance ?? (instance = new ReadWriteService()); }
         }
 
-        private bool check_string(string s)
+        public void ReadSettings()
         {
-            if (s.Trim().ToLower().Equals(string.Empty))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        //*****************************************************************************************//
-        //*************************** Methoden zum Einlesen von Dateien ***************************//
-        //*****************************************************************************************//
-
-        public void read_out_settings_xml()
-        {
-            if (!File.Exists(AppController.Instance.PATH_TO_PROGRAM + "settings.xml"))
+            if (!File.Exists(NavigationController.Instance.PathToProgram + "settings.xml"))
             {
                 // Standardwerte setzen
-                AppController.Instance.SETTINGS.LANGUAGE = new Language(AppController.Instance.SETTINGS.STD_LANGUAGE.NAME, AppController.Instance.SETTINGS.STD_LANGUAGE.CODE);
+                Settings.Instance.Language = new Language(Settings.Instance.DefaultLanguage.Name, Settings.Instance.DefaultLanguage.Code);
             }
             else
             {
                 XmlSerializer reader = new XmlSerializer(typeof(Settings));
-                using (FileStream input = File.OpenRead(AppController.Instance.PATH_TO_SETTINGS))
+                using (FileStream input = File.OpenRead(NavigationController.Instance.PathToSettings))
                 {
                     Settings rx = reader.Deserialize(input) as Settings;
 
                     string name = string.Empty;
-                    string code = rx.LANGUAGE.CODE.Trim();
+                    string code = rx.Language.Code.Trim();
 
                     switch (code)
                     {
@@ -61,28 +44,24 @@ namespace EBookie.services
                             break;
                     }
 
-                    AppController.Instance.SETTINGS.LANGUAGE = new Language(name, code);
+                    Settings.Instance.Language = new Language(name, code);
 
-                    if (AppController.Instance.SETTINGS.LANGUAGE.NAME.ToString().Equals(string.Empty) || (AppController.Instance.SETTINGS.LANGUAGE.CODE.ToString().Equals(string.Empty)))
+                    if (Settings.Instance.Language.Name.ToString().Equals(string.Empty) || (Settings.Instance.Language.Code.ToString().Equals(string.Empty)))
                     {
-                        AppController.Instance.SETTINGS.LANGUAGE.NAME = AppController.Instance.SETTINGS.STD_LANGUAGE.NAME;
-                        AppController.Instance.SETTINGS.LANGUAGE.CODE = AppController.Instance.SETTINGS.STD_LANGUAGE.CODE;
+                        Settings.Instance.Language.Name = Settings.Instance.DefaultLanguage.Name;
+                        Settings.Instance.Language.Code = Settings.Instance.DefaultLanguage.Code;
                     }
                 }
             }
         }
 
-        //*****************************************************************************************//
-        //************************** Methoden zum Schreiben von Dateien ***************************//
-        //*****************************************************************************************//
-
-        public void write_settings_to_xml()
+        public void WriteSettings()
         {
             XmlSerializer writer = new XmlSerializer(typeof(Settings));
 
-            using (FileStream output = File.OpenWrite(AppController.Instance.PATH_TO_SETTINGS))
+            using (FileStream output = File.OpenWrite(NavigationController.Instance.PathToSettings))
             {
-                writer.Serialize(output, AppController.Instance.SETTINGS);
+                writer.Serialize(output, Settings.Instance);
             }
         }
     }

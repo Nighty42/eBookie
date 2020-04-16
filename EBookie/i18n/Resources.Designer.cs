@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EBookie.languages {
+namespace eBookie.i18n {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace EBookie.languages {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -39,7 +39,7 @@ namespace EBookie.languages {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EBookie.languages.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("eBookie.i18n.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -493,7 +493,7 @@ namespace EBookie.languages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Dieses Programm wird unter den Bestimmungen des ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dieses Programm wird unter den Bestimmungen der ähnelt.
         /// </summary>
         public static string tb_footnote_2 {
             get {
@@ -502,7 +502,7 @@ namespace EBookie.languages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Massachusetts Institute of Technology (MIT) von 1988 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Massachusetts Institute of Technology (MIT)-Lizenz ähnelt.
         /// </summary>
         public static string tb_footnote_3 {
             get {
@@ -511,7 +511,7 @@ namespace EBookie.languages {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die vertrieben. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die von 1988 vertrieben. ähnelt.
         /// </summary>
         public static string tb_footnote_4 {
             get {

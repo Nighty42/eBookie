@@ -1,23 +1,12 @@
-﻿namespace EBookie.model
+﻿namespace eBookie.model
 {
     public class SyncDevice
     {
-        private string _name;
-        public string NAME    // obligatorisch
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
+        public string Name { get; set; }
 
-        public SyncDevice(string _name)
+        public SyncDevice(string name)
         {
-            NAME = _name;
+            Name = name;
         }
     }
 }

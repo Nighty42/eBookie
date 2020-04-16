@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace EBookie.services
+namespace eBookie.services
 {
     class RelayCommand : ICommand
     {

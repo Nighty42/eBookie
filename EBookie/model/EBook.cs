@@ -1,40 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace EBookie.model
+namespace eBookie.model
 {
     [Serializable]
     public class EBook
     {
-        private string _title;
-        public string TITLE    // obligatorisch
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                _title = value;
-            }
-        }
+        public static readonly ReadOnlyCollection<string> Formats = new ReadOnlyCollection<string>(new string[] {
+            "azw", "azw3", 
+            "cb7", "cba", "cbr", "cbt", "cbz", 
+            "epub", 
+            "kf8", 
+            "mobi", 
+            "pdf", "prc" });
 
-        private string _author;
-        public string AUTHOR
-        {
-            get
-            {
-                return _author;
-            }
-            set
-            {
-                _author = value;
-            }
-        }
+        public string Title { get; set; }
+        public string Author { get; set; }
 
-        public EBook(string _title, string _author)
+        public EBook(string title, string author)
         {
-            TITLE = _title;
-            AUTHOR = _author;
+            Title = title;
+            Author = author;
         }
     }
 }

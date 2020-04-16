@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace EBookie.model
+namespace eBookie.model
 {
     [Serializable]
     public class FilePath
     {
-        public string FILENAME { get; set; }
-        public string PATH { get; set; }
+        public string Filename { get; set; }
+        public string Path { get; set; }
 
         public FilePath(string filename, string path)
         {
-            FILENAME = filename;
-            PATH = path;
+            Filename = filename;
+            Path = path;
         }
 
         public FilePath() { }

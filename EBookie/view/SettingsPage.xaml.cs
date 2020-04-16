@@ -1,9 +1,10 @@
-﻿using EBookie.model;
-using EBookie.viewmodel;
+﻿using eBookie.model;
+using eBookie.services;
+using eBookie.viewmodel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EBookie.view
+namespace eBookie.view
 {
     /// <summary>
     /// Interaktionslogik für SettingsPage.xaml
@@ -37,10 +38,10 @@ namespace EBookie.view
 
         private void SettingsPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (!AppWindow.Instance.DONT_SAVE_BACK_ENTRY)
+            if (!NavigationController.Instance.DontSaveBackEntry)
             {
                 // Zurück-Eintrag hinzufügen
-                AppController.Instance.BACKSTACK.Add(new PageEntry("SettingsPage", null));
+                NavigationController.Instance.PageStack.Add(new PageEntry("SettingsPage", null));
             }
 
             SettingsPageViewModel.Instance = null;

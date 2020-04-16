@@ -1,11 +1,11 @@
-﻿using EBookie.model;
-using EBookie.services;
-using EBookie.viewmodel;
+﻿using eBookie.model;
+using eBookie.services;
+using eBookie.viewmodel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EBookie.view
+namespace eBookie.view
 {
     /// <summary>
     /// Interaktionslogik für LicenseTermsPage.xaml
@@ -50,10 +50,10 @@ namespace EBookie.view
 
         private void LicenseTermsPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (!AppWindow.Instance.DONT_SAVE_BACK_ENTRY)
+            if (!NavigationController.Instance.DontSaveBackEntry)
             {
                 // Zurück-Eintrag hinzufügen
-                AppController.Instance.BACKSTACK.Add(new PageEntry("LicenseTermsPage", null));
+                NavigationController.Instance.PageStack.Add(new PageEntry("LicenseTermsPage", null));
             }
 
             LicenseTermsPageViewModel.Instance = null;

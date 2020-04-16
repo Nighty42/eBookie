@@ -1,37 +1,39 @@
-﻿namespace EBookie.model
+﻿using System.IO;
+using System.Text;
+
+namespace eBookie.model
 {
     public class EBookFolder
     {
-        private string _path;
-        public string PATH    // obligatorisch
+        public string Path { get; set; }
+        public string Device { get; set; }
+        public EBookList EBookList { get; set; }
+
+        public EBookFolder(string path, string device, EBookList eBookList)
         {
-            get
-            {
-                return _path;
-            }
-            set
-            {
-                _path = value;
-            }
+            Path = path;
+            Device = device;
+            EBookList = eBookList;
         }
 
-        private string _device;
-        public string DEVICE    // obligatorisch
+        public void Read()
         {
-            get
-            {
-                return _device;
-            }
-            set
-            {
-                _device = value;
-            }
-        }
+            EBookList.Clear();
 
-        public EBookFolder(string _path, string _device)
-        {
-            PATH = _path;
-            DEVICE = _device;
+            if(Directory.Exists(Path))
+            {
+                StringBuilder formats = new StringBuilder("");
+                for(int i = 0; i < EBook.Formats.Count; i++)
+                {
+                    formats.Append($"{EBook.Formats[i]}");
+                    if(i < EBook.Formats.Count)
+                    {
+                        formats.Append($"|");
+                    }
+                }
+
+                string[] files = Directory.GetFiles(Path, $"^+\\.({formats})$");
+            }
         }
     }
 }

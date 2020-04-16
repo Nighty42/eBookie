@@ -1,9 +1,9 @@
-﻿<Page x:Class="EBookie.view.AboutPage"
+﻿<Page x:Class="eBookie.view.AboutPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:p="clr-namespace:EBookie.languages"
+      xmlns:p="clr-namespace:eBookie.i18n"
       mc:Ignorable="d" 
       Background="GhostWhite"
       d:DesignHeight="430"
@@ -44,7 +44,7 @@
                 <DataGridTemplateColumn Header="Bild" Width="30" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding PICNAME}" Width="18"/>
+                            <Image Source="{Binding PicName}" Width="18"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -52,19 +52,19 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock>
-                                <Hyperlink TextDecorations="Underline" NavigateUri="{Binding WEBSITE}" ToolTip="{Binding WEBSITE}" RequestNavigate="Hyperlink_RequestNavigate">
-                                    <TextBlock Text="{Binding DESIGNER}"/>
+                                <Hyperlink TextDecorations="Underline" NavigateUri="{Binding Website}" RequestNavigate="Hyperlink_RequestNavigate">
+                                    <TextBlock Text="{Binding Designer}"/>
                                 </Hyperlink>
                             </TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Lizenz" Width="75" Binding="{Binding LICENCE}" CanUserResize="False"/>
+                <DataGridTextColumn Header="Lizenz" Width="75" Binding="{Binding License}" CanUserResize="False"/>
                 <DataGridTemplateColumn Header="Link" Width="34" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock>
-                                <Hyperlink TextDecorations="None" NavigateUri="{Binding SOURCE}" ToolTip="{Binding SOURCE}" RequestNavigate="Hyperlink_RequestNavigate">
+                                <Hyperlink TextDecorations="None" NavigateUri="{Binding Source}" ToolTip="{Binding Source}" RequestNavigate="Hyperlink_RequestNavigate">
                                     <Image Name="someName" Source="pack://siteoforigin:,,,/images/link.png" Width="18"/>
                                 </Hyperlink>
                             </TextBlock>

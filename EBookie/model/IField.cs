@@ -2,27 +2,26 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace EBookie.model
+namespace eBookie.model
 {
     public class IField
     {
         // public object IFOBJECT { get; set; }
-        public Label LABEL { get; set; }
-        public Image STATUSIMG { get; set; }
-        public bool OBLIGATORY { get; set; }
-        public int MIN_LENGTH { get; set; }
-        public int MAX_LENGTH { get; set; }
-        public string[] SEARCHPATTERN { get; set; }
-        public int[] MIN_CHARS { get; set; }
-        public bool SPACE_ALLOWED { get; set; }
-        public string[] PLACEHOLDER { get; set; }
-        public int STATUS { get; set; }
+        public Label Label { get; set; }
+        public Image StatusImage { get; set; }
+        public bool IsObligatory { get; set; }
+        public int MinLength { get; set; }
+        public int MaxLength { get; set; }
+        public string[] Searchpattern { get; set; }
+        public int[] MinChars { get; set; }
+        public bool IsSpaceAllowed { get; set; }
+        public string[] Placeholder { get; set; }
+        public int Status { get; set; }
 
-        private ComboBox ifobject_cb;
-        private TextBox ifobject_tb;
-        private PasswordBox ifobject_pb;
-
-        private int object_type = 0;
+        private readonly ComboBox IfComboBox;
+        private readonly TextBox IfTextBox;
+        private readonly PasswordBox IfPasswordBox;
+        private readonly int ObjectType = 0;
 
         public IField() { }
 
@@ -40,85 +39,85 @@ namespace EBookie.model
 
         private IField(int object_type, Label label, Image statusimg, bool obligatory, int min_length, int max_length, string[] searchpattern, int[] min_chars, bool space_allowed, string[] placeholder)
         {
-            LABEL = label;
-            STATUSIMG = statusimg;
-            OBLIGATORY = obligatory;
-            MIN_LENGTH = min_length;
-            MAX_LENGTH = max_length;
-            SEARCHPATTERN = searchpattern;
-            MIN_CHARS = min_chars;
-            SPACE_ALLOWED = space_allowed;
-            PLACEHOLDER = placeholder;
+            Label = label;
+            StatusImage = statusimg;
+            IsObligatory = obligatory;
+            MinLength = min_length;
+            MaxLength = max_length;
+            Searchpattern = searchpattern;
+            MinChars = min_chars;
+            IsSpaceAllowed = space_allowed;
+            Placeholder = placeholder;
 
-            STATUS = 0;
+            Status = 0;
 
-            this.object_type = object_type;
+            ObjectType = object_type;
         }
 
 
         public IField(TextBox ifobject, Label label, Image statusimg, bool obligatory, int min_length, int max_length, string[] searchpattern, int[] min_chars, bool space_allowed, string[] placeholder)
             : this(1, label, statusimg, obligatory, min_length, max_length, searchpattern, min_chars, space_allowed, placeholder)
         {
-            ifobject_tb = ifobject;
+            IfTextBox = ifobject;
         }
 
         public IField(ComboBox ifobject, Label label, Image statusimg, bool obligatory, int min_length, int max_length, string[] searchpattern, int[] min_chars, bool space_allowed, string[] placeholder)
             : this(2, label, statusimg, obligatory, min_length, max_length, searchpattern, min_chars, space_allowed, placeholder)
         {
-            ifobject_cb = ifobject;
+            IfComboBox = ifobject;
         }
 
         public IField(PasswordBox ifobject, Label label, Image statusimg, bool obligatory, int min_length, int max_length, string[] searchpattern, int[] min_chars, bool space_allowed, string[] placeholder)
             : this(3, label, statusimg, obligatory, min_length, max_length, searchpattern, min_chars, space_allowed, placeholder)
         {
-            ifobject_pb = ifobject;
+            IfPasswordBox = ifobject;
         }
 
-        public string TEXT
+        public string Text
         {
             get
             {
-                switch (object_type)
+                switch (ObjectType)
                 {
                     case 1:
-                        return ifobject_tb.Text;
+                        return IfTextBox.Text;
                     case 2:
-                        return ifobject_cb.Text;
+                        return IfComboBox.Text;
                     case 3:
-                        return ifobject_pb.Password;
+                        return IfPasswordBox.Password;
                     default:
                         return string.Empty;
                 }
             }
             set
             {
-                switch (object_type)
+                switch (ObjectType)
                 {
                     case 1:
-                        ifobject_tb.Text = value;
+                        IfTextBox.Text = value;
                         break;
                     case 2:
-                        ifobject_cb.Text = value;
+                        IfComboBox.Text = value;
                         break;
                     case 3:
-                        ifobject_pb.Password = value;
+                        IfPasswordBox.Password = value;
                         break;
                 }
             }
         }
 
-        public string IFNAME
+        public string IfName
         {
             get
             {
-                switch (object_type)
+                switch (ObjectType)
                 {
                     case 1:
-                        return ifobject_tb.Name;
+                        return IfTextBox.Name;
                     case 2:
-                        return ifobject_cb.Name;
+                        return IfComboBox.Name;
                     case 3:
-                        return ifobject_pb.Name;
+                        return IfPasswordBox.Name;
                     default:
                         return null;
                 }

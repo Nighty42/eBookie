@@ -1,31 +1,21 @@
-﻿using EBookie.model;
-using EBookie.services;
-using EBookie.view;
+﻿using eBookie.services;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace EBookie
+namespace eBookie
 {
     /// <summary>
     /// Interaktionslogik für "App.xaml"
     /// </summary>
     public partial class App : Application
     {
-        public static string PROGRAM_VERSION;
-        public static string LAST_CHANGE_DATE;
+        public static App Instance { get; set; }
 
         /// <summary>
         /// Brings window to foreground
@@ -55,6 +45,8 @@ namespace EBookie
         [STAThread]
         protected override void OnStartup(StartupEventArgs e)
         {
+            Instance = this;
+
             // Restore-Mode
             const int SwRestore = 9;
 
@@ -82,21 +74,18 @@ namespace EBookie
             else
             {
                 // Letztes Build-Datum und Programmversion ermitteln
-                get_app_info();
-
-                // Globale Variablen initialisieren
-                declare_globals();
+                GetAppInfo();
 
                 // Einstellungen auslesen
-                ReadWriteService.Instance.read_out_settings_xml();
+                ReadWriteService.Instance.ReadSettings();
 
                 // Sprache der Anwendung setzen
-                AppController.Instance.init_language();
+                LanguageController.Instance.InitLanguage();
 
                 // Anwendung erzeugen
                 new AppWindow();
 
-                AppController.Instance.navigate_to_page("MainPage", null);
+                NavigationController.Instance.NavigateToPage("MainPage", null);
 
                 Current.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => { })).Wait();
 
@@ -105,40 +94,38 @@ namespace EBookie
             }
         }
 
-        private void get_app_info()
-        {
-            Version v = Assembly.GetExecutingAssembly().GetName().Version;
-            PROGRAM_VERSION = string.Format(CultureInfo.InvariantCulture, @"{0}.{1}.{2} (Alpha)", v.Major, v.Minor, v.Build);
+        public string ProgramVersion { get; set; }
+        public string LastModified { get; set; }
+        public bool HasChanged { get; set; } = false;
 
-            DateTime dt = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
-            LAST_CHANGE_DATE = dt.ToString("dd.MM.yyyy");
+        public void PrepareExit()
+        {
+            // Settings speichern
+            ReadWriteService.Instance.WriteSettings();
         }
 
-        private void declare_globals()
+        public new void Exit(bool restart)
         {
-            AppController.Instance.BACKSTACK = new ObservableCollection<PageEntry>();
+            // Daten speichern und Taskbar abbauen
+            PrepareExit();
 
-            AppController.Instance.SUPPORTED_LANGUAGES = new List<Language>();
-
-            AppController.Instance.SUPPORTED_LANGUAGES.Add(new Language("Deutsch", "de-DE"));
-            AppController.Instance.SUPPORTED_LANGUAGES.Add(new Language("English", "en-GB"));
-
-            AppController.Instance.PATH_TO_PROGRAM = AppDomain.CurrentDomain.BaseDirectory;
-            AppController.Instance.PATH_TO_SETTINGS = AppController.Instance.PATH_TO_PROGRAM + "settings.xml";
-
-            // Einstellungen aufbauen
-            AppController.Instance.SETTINGS = new Settings();
-
-            // PicSources erzeugen
-            PicSource.init_PicSources();
-
-            // Standard-Anwendungssprache anhand Systemsprache setzen
-            AppController.Instance.SETTINGS.STD_LANGUAGE = AppController.Instance.SUPPORTED_LANGUAGES.Find(x => x.CODE == CultureInfo.CurrentCulture.Name);
-
-            if (AppController.Instance.SETTINGS.STD_LANGUAGE == null)
+            // Anwendung neustarten
+            if (restart)
             {
-                AppController.Instance.SETTINGS.STD_LANGUAGE = AppController.Instance.SUPPORTED_LANGUAGES.Find(x => x.CODE == "en-GB");
+                Process.Start(ResourceAssembly.Location);
             }
+
+            // Anwendung beenden
+            Current.Shutdown();
+        }
+
+        public void GetAppInfo()
+        {
+            Version v = Assembly.GetExecutingAssembly().GetName().Version;
+            ProgramVersion = string.Format(CultureInfo.InvariantCulture, @"{0}.{1}.{2} (Alpha)", v.Major, v.Minor, v.Build);
+
+            DateTime dt = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
+            LastModified = dt.ToString("dd.MM.yyyy");
         }
     }
 }

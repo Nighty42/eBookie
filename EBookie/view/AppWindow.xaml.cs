@@ -1,45 +1,27 @@
-﻿using EBookie.services;
+﻿using eBookie.model;
+using eBookie.services;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace EBookie
+namespace eBookie
 {
     /// <summary>
     /// Interaktionslogik für AppWindow.xaml
     /// </summary>
     public partial class AppWindow : Window
     {
-        public bool DONT_SAVE_BACK_ENTRY = false;
-
         public ContextMenu tray_context_menu;
 
-        // Instanz des Windows (Klasse)
-        static AppWindow instance;
-
-        public static AppWindow Instance
-        {
-            get { return instance; }
-        }
+        public static AppWindow Instance { get; set; } = new AppWindow();
 
         public AppWindow()
         {
             InitializeComponent();
 
-            instance = this;
-
-            if (AppController.Instance.SETTINGS.LANGUAGE.CODE.Equals("de-DE"))
+            if (Settings.Instance.Language.Code.Equals("de-DE"))
             {
                 img_btnLanguage.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/images/english.png"));
             }
@@ -49,9 +31,9 @@ namespace EBookie
             }
         }
 
-        private void _FRAME_ContentRendered(object sender, EventArgs e)
+        private void FrameContentRendered(object sender, EventArgs e)
         {
-            if (AppController.Instance.BACKSTACK.Count > 0 || AppController.Instance.HOMEPAGE != null)
+            if (NavigationController.Instance.PageStack.Count > 0 || NavigationController.Instance.Homepage != null)
             {
                 btn_Back.IsEnabled = true;
             }
@@ -60,7 +42,53 @@ namespace EBookie
                 btn_Back.IsEnabled = false;
             }
 
-            DONT_SAVE_BACK_ENTRY = false;
+            NavigationController.Instance.DontSaveBackEntry = false;
+        }
+
+        private void btn_Home_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationController.Instance.Home();
+        }
+
+        private void btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationController.Instance.Back();
+        }
+
+        private void btn_Reset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Language_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult answer = MessageBox.Show(i18n.Resources.mbx_q_restart_app_1 + "\n\n" + i18n.Resources.mbx_q_restart_app_2, i18n.Resources.change_language, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+            if (answer != MessageBoxResult.Cancel)
+            {
+                LanguageController.Instance.ChangeLanguage();
+
+                if (answer == MessageBoxResult.Yes)
+                {
+                    // Settings speichern und Anwendung neustarten
+                    App.Instance.Exit(true);
+                }
+            }
+        }
+
+        private void btn_Sync_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            App.Instance.Exit(false);
         }
 
         //*********************************************************************//
@@ -69,7 +97,7 @@ namespace EBookie
 
         private void ExitItem_Click(object sender, RoutedEventArgs e)
         {
-            AppController.Instance.exit_app(false);
+            App.Instance.Exit(false);
         }
 
         // Datei wählen, Systeme aus ausgewählter Datei importieren
@@ -104,18 +132,18 @@ namespace EBookie
 
         private void SettingsItem_Click(object sender, RoutedEventArgs e)
         {
-            AppController.Instance.navigate_to_page("SettingsPage", null);
+            NavigationController.Instance.NavigateToPage("SettingsPage", null);
         }
 
         private void FeedbackItem_Click(object sender, RoutedEventArgs e)
         {
-            string url = "mailto:nighty42@mailbox.org?subject=eBookie - Feedback";
+            string url = "mailto:mariusraht+1@gmail.com?subject=eBookie - Feedback";
             Process.Start(url);
         }
 
         private void AboutItem_Click(object sender, RoutedEventArgs e)
         {
-            AppController.Instance.navigate_to_page("AboutPage", null);
+            NavigationController.Instance.NavigateToPage("AboutPage", null);
         }
 
         //*****************************************************************************************//
@@ -123,7 +151,7 @@ namespace EBookie
 
         private void AppWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            AppController.Instance.exit_app(false);
+            App.Instance.Exit(false);
         }
     }
 }

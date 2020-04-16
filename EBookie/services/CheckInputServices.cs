@@ -1,4 +1,4 @@
-﻿using EBookie.model;
+﻿using eBookie.model;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
     - 
 */
 
-namespace EBookie.services
+namespace eBookie.services
 {
     public static class CheckInput
     {
@@ -21,24 +21,24 @@ namespace EBookie.services
 
             message = MessageCreationService.create_message_from_ifield_status(ifield, true);
 
-            if (ifield.STATUS == 0)
+            if (ifield.Status == 0)
             {
-                ifield.LABEL.Foreground = Brushes.Black;
+                ifield.Label.Foreground = Brushes.Black;
 
-                if (ifield.STATUSIMG != null)
+                if (ifield.StatusImage != null)
                 {
-                    ifield.STATUSIMG.ToolTip = null;
+                    ifield.StatusImage.ToolTip = null;
                 }
 
                 return true;
             }
             else
             {
-                ifield.LABEL.Foreground = Brushes.Red;
+                ifield.Label.Foreground = Brushes.Red;
 
-                if (ifield.STATUSIMG != null)
+                if (ifield.StatusImage != null)
                 {
-                    ifield.STATUSIMG.ToolTip = message;
+                    ifield.StatusImage.ToolTip = message;
                 }
 
                 return false;
@@ -56,26 +56,26 @@ namespace EBookie.services
                 check_if_ok(ifield);
 
                 // Status: 0 (ok)
-                if (ifield.STATUS == 0)
+                if (ifield.Status == 0)
                 {
-                    ifield.LABEL.Foreground = Brushes.Black;
+                    ifield.Label.Foreground = Brushes.Black;
 
                     // Tooltip für Status-Image des Eingabefeldes setzen
-                    if (ifield.STATUSIMG != null)
+                    if (ifield.StatusImage != null)
                     {
                         // Tooltip des Status-Images entfernen
-                        ifield.STATUSIMG.ToolTip = null;
+                        ifield.StatusImage.ToolTip = null;
                     }
                 }
                 else
                 {
-                    ifield.LABEL.Foreground = Brushes.Red;
+                    ifield.Label.Foreground = Brushes.Red;
 
                     // Tooltip für Status-Image des Eingabefeldes setzen
-                    if (ifield.STATUSIMG != null)
+                    if (ifield.StatusImage != null)
                     {
                         // Error-Nachricht für Tooltip des Status-Images
-                        ifield.STATUSIMG.ToolTip = MessageCreationService.create_message_from_ifield_status(ifield, false);
+                        ifield.StatusImage.ToolTip = MessageCreationService.create_message_from_ifield_status(ifield, false);
                     }
 
                     if (err_candidate == null)
@@ -105,27 +105,27 @@ namespace EBookie.services
         /// <param name="Rückgabewert">(Integer) - Errorcodes: 0 = ok, 1 = leer, 2 = Maximale Länge überschritten, 3 = Minimale Länge unterschritten, 4 = Ungültiger Wert, 5 = Nicht genug upper, 6 = Nicht genug lower, 7 = Nicht genug digits, 8 = Nicht genug specials, 9 = unerlaubte Leerzeichen gefunden</param>
         public static void check_if_ok(IField ifield)
         {
-            ifield.STATUS = 0;
+            ifield.Status = 0;
 
             // Nur obligatorische Felder
-            if (check_if_empty(ifield) && ifield.OBLIGATORY)
+            if (check_if_empty(ifield) && ifield.IsObligatory)
             {
-                ifield.STATUS = 1;
+                ifield.Status = 1;
                 return;
             }
 
             // Nur obligatorische Felder
-            if (check_if_placeholder(ifield) && ifield.OBLIGATORY)
+            if (check_if_placeholder(ifield) && ifield.IsObligatory)
             {
-                ifield.STATUS = 1;
+                ifield.Status = 1;
                 return;
             }
 
             if (check_if_over_max_length(ifield))
             {
-                ifield.STATUS = 2;
+                ifield.Status = 2;
 
-                if (ifield.OBLIGATORY)
+                if (ifield.IsObligatory)
                 {
                     return;
                 }
@@ -133,26 +133,26 @@ namespace EBookie.services
 
             if (check_if_under_min_length(ifield))
             {
-                ifield.STATUS = 3;
+                ifield.Status = 3;
                 return;
             }
 
             if (check_if_invalid_value(ifield))
             {
-                ifield.STATUS = 4;
+                ifield.Status = 4;
                 return;
             }
 
             // Status 5 - 8
-            if (ifield.MIN_CHARS != null)
+            if (ifield.MinChars != null)
             {
                 check_if_min_valid_chars(ifield);
                 return;
             }
 
-            if (!ifield.SPACE_ALLOWED && check_if_contains_space(ifield))
+            if (!ifield.IsSpaceAllowed && check_if_contains_space(ifield))
             {
-                ifield.STATUS = 9;
+                ifield.Status = 9;
                 return;
             }
 
@@ -163,7 +163,7 @@ namespace EBookie.services
         private static bool check_if_empty(IField ifield)
         {
             // Nur prüfen, wenn obligatorisch
-            if (ifield.TEXT.Trim().Equals(string.Empty))
+            if (ifield.Text.Trim().Equals(string.Empty))
             {
                 return true;
             }
@@ -173,11 +173,11 @@ namespace EBookie.services
 
         private static bool check_if_placeholder(IField ifield)
         {
-            if (ifield.PLACEHOLDER != null)
+            if (ifield.Placeholder != null)
             {
-                foreach (string ph in ifield.PLACEHOLDER)
+                foreach (string ph in ifield.Placeholder)
                 {
-                    if (ifield.TEXT.Equals(ph))
+                    if (ifield.Text.Equals(ph))
                     {
                         return true;
                     }
@@ -190,11 +190,11 @@ namespace EBookie.services
         // Höchstlänge überschritten?
         private static bool check_if_over_max_length(IField ifield)
         {
-            if (ifield.MAX_LENGTH == -1)
+            if (ifield.MaxLength == -1)
             {
                 return false;
             }
-            else if (ifield.TEXT.Length > ifield.MAX_LENGTH)
+            else if (ifield.Text.Length > ifield.MaxLength)
             {
                 return true;
             }
@@ -206,13 +206,13 @@ namespace EBookie.services
         private static bool check_if_under_min_length(IField ifield)
         {
             // Nur prüfen, wenn obligatorisch
-            if (ifield.OBLIGATORY)
+            if (ifield.IsObligatory)
             {
-                if (ifield.MIN_LENGTH == -1)
+                if (ifield.MinLength == -1)
                 {
                     return false;
                 }
-                else if (ifield.TEXT.Length < ifield.MIN_LENGTH)
+                else if (ifield.Text.Length < ifield.MinLength)
                 {
                     return true;
                 }
@@ -224,11 +224,11 @@ namespace EBookie.services
         // Ungültiger Wert?
         private static bool check_if_invalid_value(IField ifield)
         {
-            if (ifield.SEARCHPATTERN != null)
+            if (ifield.Searchpattern != null)
             {
-                foreach (string search_pattern in ifield.SEARCHPATTERN)
+                foreach (string search_pattern in ifield.Searchpattern)
                 {
-                    Match m = Regex.Match(ifield.TEXT, search_pattern);
+                    Match m = Regex.Match(ifield.Text, search_pattern);
                     if (m.Success)
                     {
                         return false;
@@ -249,7 +249,7 @@ namespace EBookie.services
             int no_digit = 0;
             int no_sz = 0;
 
-            foreach (char c in ifield.TEXT)
+            foreach (char c in ifield.Text)
             {
                 if (char.IsUpper(c))
                 {
@@ -269,28 +269,28 @@ namespace EBookie.services
                 }
             }
 
-            if (no_upper < ifield.MIN_CHARS[0])
+            if (no_upper < ifield.MinChars[0])
             {
-                ifield.STATUS = 5;
+                ifield.Status = 5;
             }
-            else if (no_lower < ifield.MIN_CHARS[1])
+            else if (no_lower < ifield.MinChars[1])
             {
-                ifield.STATUS = 6;
+                ifield.Status = 6;
             }
-            else if (no_digit < ifield.MIN_CHARS[2])
+            else if (no_digit < ifield.MinChars[2])
             {
-                ifield.STATUS = 7;
+                ifield.Status = 7;
             }
-            else if (no_sz < ifield.MIN_CHARS[3])
+            else if (no_sz < ifield.MinChars[3])
             {
-                ifield.STATUS = 8;
+                ifield.Status = 8;
             }
         }
 
         // Enthält die Eingabe Leerzeichen?
         private static bool check_if_contains_space(IField ifield)
         {
-            if (Regex.IsMatch(ifield.TEXT, @"\s"))
+            if (Regex.IsMatch(ifield.Text, @"\s"))
             {
                 return true;
             }

@@ -1,31 +1,40 @@
-﻿using System;
+﻿using eBookie.services;
+using System;
 using System.Globalization;
 using System.Threading;
 using System.Xml.Serialization;
 
-namespace EBookie.model
+namespace eBookie.model
 {
     [Serializable]
     public class Settings
     {
-        public Language LANGUAGE { get; set; }
+        public Language Language { get; set; }
 
         [XmlIgnore]
-        public Language STD_LANGUAGE { get; set; }
+        public Language DefaultLanguage { get; set; }
 
-        public Settings()
+        public static Settings Instance { get; set; } = new Settings();
+        private Settings()
         {
-            LANGUAGE = new Language();
+            Language = new Language();
+
+            DefaultLanguage = LanguageController.Instance.SupportedLanguages.Find(x => x.Code == CultureInfo.CurrentCulture.Name);
+
+            if (DefaultLanguage == null)
+            {
+                DefaultLanguage = LanguageController.Instance.SupportedLanguages.Find(x => x.Code == "en-GB");
+            }
         }
 
-        public void change_language(string language_code)
+        public void ChangeLanguage(string language_code)
         {
-            LANGUAGE.CODE = language_code;
+            Language.Code = language_code;
             CultureInfo newCulture = new CultureInfo(language_code);
 
             Thread.CurrentThread.CurrentCulture = newCulture;
             Thread.CurrentThread.CurrentCulture = newCulture;
-            languages.Resources.Culture = newCulture;
+            i18n.Resources.Culture = newCulture;
         }
     }
 }

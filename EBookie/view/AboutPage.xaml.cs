@@ -1,12 +1,12 @@
-﻿using EBookie.model;
-using EBookie.services;
-using EBookie.viewmodel;
+﻿using eBookie.model;
+using eBookie.services;
+using eBookie.viewmodel;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EBookie.view
+namespace eBookie.view
 {
     /// <summary>
     /// Interaktionslogik für AboutPage.xaml
@@ -30,23 +30,23 @@ namespace EBookie.view
 
         private void Initialize()
         {
-            init_data_context();
+            InitDataContext();
 
-            init_UI_Elements();
+            InitUIElements();
 
             MessageCreationService.create_message("waiting_for_input", null, 0);
         }
 
-        private void init_data_context()
+        private void InitDataContext()
         {
             AppWindow.Instance.DataContext = AboutPageViewModel.Instance;
             instance = this;
         }
 
-        private void init_UI_Elements()
+        private void InitUIElements()
         {
-            lbl_version.Content = App.PROGRAM_VERSION;
-            lbl_date.Content = App.LAST_CHANGE_DATE;
+            lbl_version.Content = App.Instance.ProgramVersion;
+            lbl_date.Content = App.Instance.LastModified;
 
             DateTime dateTime = DateTime.Now;
             string thisYear = dateTime.ToString("yyyy");
@@ -68,15 +68,15 @@ namespace EBookie.view
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            AppController.Instance.navigate_to_page("LicenseTermsPage", null);
+            NavigationController.Instance.NavigateToPage("LicenseTermsPage", null);
         }
 
         private void AboutPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (!AppWindow.Instance.DONT_SAVE_BACK_ENTRY)
+            if (!NavigationController.Instance.DontSaveBackEntry)
             {
                 // Zurück-Eintrag hinzufügen
-                AppController.Instance.BACKSTACK.Add(new PageEntry("AboutPage", null));
+                NavigationController.Instance.PageStack.Add(new PageEntry("AboutPage", null));
             }
 
             AboutPageViewModel.Instance = null;

@@ -121,76 +121,76 @@
     <value>eBookie</value>
   </data>
   <data name="btn_Back_tooltip" xml:space="preserve">
-    <value>Zurück zur vorherigen Oberfläche</value>
+    <value>Back to previous UI</value>
   </data>
   <data name="btn_Exit_tooltip" xml:space="preserve">
-    <value>Programm beenden</value>
+    <value>Exit program</value>
   </data>
   <data name="btn_Home_tooltip" xml:space="preserve">
-    <value>Zur Hauptoberfläche</value>
+    <value>Go to main page</value>
   </data>
   <data name="btn_Reset_tooltip" xml:space="preserve">
-    <value>Eingaben zurücksetzen</value>
+    <value>Reset input</value>
   </data>
   <data name="change_language" xml:space="preserve">
-    <value>Change the language to english.</value>
+    <value>Ändere die Sprache nach Deutsch</value>
   </data>
   <data name="exitApp" xml:space="preserve">
-    <value>Beenden</value>
+    <value>Exit</value>
   </data>
   <data name="mbx_q_restart_app_1" xml:space="preserve">
     <value>Die ausgewählte Sprache wurde geladen und wird nach einem Neustart der Anwendung aktiv.</value>
   </data>
   <data name="mbx_q_restart_app_2" xml:space="preserve">
-    <value>Möchten Sie die Anwendung jetzt neustarten?</value>
+    <value>Do you want to restart eBookie?</value>
   </data>
   <data name="menuItem_About" xml:space="preserve">
-    <value>Über eBookie</value>
+    <value>About eBookie</value>
   </data>
   <data name="menuItem_Extras" xml:space="preserve">
     <value>Extras</value>
   </data>
   <data name="menuItem_Feedback" xml:space="preserve">
-    <value>Feedback senden</value>
+    <value>Send feedback</value>
   </data>
   <data name="menuItem_Help" xml:space="preserve">
-    <value>Hilfe</value>
+    <value>Help</value>
   </data>
   <data name="menuItem_importBooks" xml:space="preserve">
-    <value>Bücher importieren</value>
+    <value>Import books</value>
   </data>
   <data name="menuItem_Program" xml:space="preserve">
-    <value>Programm</value>
+    <value>Program</value>
   </data>
   <data name="settings" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Settings</value>
   </data>
   <data name="AboutPage_title" xml:space="preserve">
-    <value>Über eBookie</value>
+    <value>About eBookie</value>
   </data>
   <data name="LicenseTermsPage_title" xml:space="preserve">
-    <value>Lizenzbestimmungen</value>
+    <value>License terms</value>
   </data>
   <data name="lvc_author" xml:space="preserve">
-    <value>Autor</value>
+    <value>Author</value>
   </data>
   <data name="lvc_btnDeleteBook_tooltip" xml:space="preserve">
     <value>Buch unwiderruflich löschen</value>
   </data>
   <data name="lvc_btnOpenPath_tooltip" xml:space="preserve">
-    <value>Dateipfad aufrufen</value>
+    <value>Open file path</value>
   </data>
   <data name="lvc_deleteBook" xml:space="preserve">
-    <value>L</value>
+    <value>D</value>
   </data>
   <data name="lvc_deleteBook_tooltip" xml:space="preserve">
     <value>Buch unwiderruflich löschen</value>
   </data>
   <data name="lvc_openPath" xml:space="preserve">
-    <value>Ö</value>
+    <value>O</value>
   </data>
   <data name="lvc_openPath_tooltip" xml:space="preserve">
-    <value>Dateipfad im Explorer öffnen</value>
+    <value>Open file path</value>
   </data>
   <data name="lvc_syncDevice" xml:space="preserve">
     <value>Gerät zur Synchronisierung</value>
@@ -199,13 +199,13 @@
     <value>Gerät mit dem die Synchronisierung stattfindet.</value>
   </data>
   <data name="lvc_title" xml:space="preserve">
-    <value>Titel</value>
+    <value>Title</value>
   </data>
   <data name="lbl_lastModified" xml:space="preserve">
-    <value>Änderungsdatum:</value>
+    <value>Last modified:</value>
   </data>
   <data name="lbl_lastModifier" xml:space="preserve">
-    <value>Letzter Änderer:</value>
+    <value>Last modifier:</value>
   </data>
   <data name="lbl_license" xml:space="preserve">
     <value>Lizenzbestimmungen:</value>
@@ -214,10 +214,10 @@
     <value>Version:</value>
   </data>
   <data name="LicenseTermsPage_h1" xml:space="preserve">
-    <value>Die MIT-Lizenz</value>
+    <value>The MIT License</value>
   </data>
   <data name="LicenseTermsPage_title1" xml:space="preserve">
-    <value>Lizenzbestimmungen</value>
+    <value>License terms</value>
   </data>
   <data name="license_term_1" xml:space="preserve">
     <value>Hiermit wird unentgeltlich jeder Person, die eine Kopie der Software und der zugehörigen Dokumentationen (die "Software") erhält, die Erlaubnis erteilt, sie uneingeschränkt zu benutzen, inklusive und ohne Ausnahme dem Recht, sie zu verwenden, kopieren, ändern, fusionieren, verlegen, verbreiten, unterlizenzieren und/oder zu verkaufen, und Personen, die diese Software erhalten, diese Rechte zu geben, unter den folgenden Bedingungen:</value>
@@ -229,43 +229,43 @@
     <value>DIE SOFTWARE WIRD OHNE JEDE AUSDRÜCKLICHE ODER IMPLIZIERTE GARANTIE BEREITGESTELLT, EINSCHLIESSLICH DER GARANTIE ZUR BENUTZUNG FÜR DEN VORGESEHENEN ODER EINEM BESTIMMTEN ZWECK SOWIE JEGLICHER RECHTSVERLETZUNG, JEDOCH NICHT DARAUF BESCHRÄNKT. IN KEINEM FALL SIND DIE AUTOREN ODER COPYRIGHTINHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE ANSPRÜCHE HAFTBAR ZU MACHEN, OB INFOLGE DER ERFÜLLUNG EINES VERTRAGES, EINES DELIKTES ODER ANDERS IM ZUSAMMENHANG MIT DER SOFTWARE ODER SONSTIGER VERWENDUNG DER SOFTWARE ENTSTANDEN.</value>
   </data>
   <data name="tb_footnote_2" xml:space="preserve">
-    <value>Dieses Programm wird unter den Bestimmungen des</value>
+    <value>This application is being distributed under the</value>
   </data>
   <data name="tb_footnote_3" xml:space="preserve">
-    <value>Massachusetts Institute of Technology (MIT) von 1988</value>
+    <value>Massachusetts Institute of Technology (MIT)-License</value>
   </data>
   <data name="tb_footnote_4" xml:space="preserve">
-    <value>vertrieben.</value>
+    <value>of 1988.</value>
   </data>
   <data name="lvc_btnHideBook_tooltip" xml:space="preserve">
-    <value>Buch nicht mehr anzeigen</value>
+    <value>Hide book</value>
   </data>
   <data name="btn_addFolder_tooltip" xml:space="preserve">
-    <value>Ausgewählten Ordner zur Liste hinzufügen</value>
+    <value>Add selected folder to list</value>
   </data>
   <data name="btn_chooseFolder_tooltip" xml:space="preserve">
-    <value>Ordner, der E-Books enthält auswählen</value>
+    <value>Choose folder which contains eBooks</value>
   </data>
   <data name="lbl_chooseFolder" xml:space="preserve">
-    <value>Ordner auswählen:</value>
+    <value>Choose folder:</value>
   </data>
   <data name="btn_removeEBookFolder_tooltip" xml:space="preserve">
-    <value>Ordner aus der Liste entfernen</value>
+    <value>Remove folder from list</value>
   </data>
   <data name="lvc_btnOpenEBookFolderPath" xml:space="preserve">
-    <value>Ö</value>
+    <value>O</value>
   </data>
   <data name="lvc_btnOpenEBookFolderPath_tooltip" xml:space="preserve">
-    <value>Ordnerpfad im Explorer öffnen</value>
+    <value>Open folder path</value>
   </data>
   <data name="lvc_device" xml:space="preserve">
-    <value>Gerät zur Synchronisierung</value>
+    <value>Device for synchronisation</value>
   </data>
   <data name="lvc_path" xml:space="preserve">
-    <value>Pfad zum Ordner</value>
+    <value>Path to folder</value>
   </data>
   <data name="lvc_removeEBookFolder" xml:space="preserve">
-    <value>L</value>
+    <value>D</value>
   </data>
   <data name="lvc_removeEBookFolder_tooltip" xml:space="preserve">
     <value>Ordner nicht mehr synchronisieren</value>
